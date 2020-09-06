@@ -6,7 +6,7 @@
 
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/slundberg/shap/master/docs/artwork/shap_header.png" width="800" />
+  <img src="https://github.com/meetyildiz/pandazip/blob/master/logo.png?raw=true" width="800" />
 </p>
 
 ---
@@ -21,12 +21,12 @@
 
 ## Install
 
-Shap can be installed from either [PyPI](https://pypi.org/project/shap) or [conda-forge](https://anaconda.org/conda-forge/shap):
+Shap can be installed from either [PyPI](https://pypi.org/project/pandazip) or [conda-forge](https://anaconda.org/conda-forge/pandazip):
 
 <pre>
-pip install shap
+pip install pandazip
 <i>or</i>
-conda install -c conda-forge shap
+conda install -c conda-forge pandazip
 </pre>
 
 ## Tree ensemble example with TreeExplainer (XGBoost/LightGBM/CatBoost/scikit-learn/pyspark models)
