@@ -14,6 +14,7 @@
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/slundberg/shap/master)
 
 **Pandazip** 
+
 Cut memory footprint by half in just three lines of code. Compress Pandas DataFrame without losing information.
 
 
