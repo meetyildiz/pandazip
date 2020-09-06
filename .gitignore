@@ -127,3 +127,21 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+.env_zip/
+.idea/.gitignore
+.idea/dbnavigator.xml
+.idea/inspectionProfiles/
+.idea/misc.xml
+.idea/modules.xml
+.idea/pandazip.iml
+.idea/sonarlint/
+env_zip/bin/
+env_zip/include/
+env_zip/pyvenv.cfg
+main.py
+.idea/vcs.xml
+env_pandazip/bin/
+env_pandazip/include/
+
