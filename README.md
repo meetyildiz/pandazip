@@ -14,7 +14,7 @@
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/slundberg/shap/master)
 
 **Pandazip** 
-Compress Pandas DataFrame without losing information, reduce memory footprint.
+Cut memory footprint by half in just three lines of code. Compress Pandas DataFrame without losing information.
 
 
 ## Install
@@ -36,5 +36,5 @@ from pandazip import Pandazip
 zipper = Pandazip()
 
 # Compress Pandas DataFrame
-compressed_dataframe = zipper.zip(raw_dataframe)
+compressed_dataframe = zipper.zip(raw_dataframe, level = "mid")
 ```
