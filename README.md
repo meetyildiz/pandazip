@@ -37,5 +37,5 @@ from pandazip import Pandazip
 zipper = Pandazip()
 
 # Compress Pandas DataFrame
-compressed_dataframe = zipper.zip(raw_dataframe, level = "mid")
+compressed_dataframe = zipper.zip(raw_dataframe, level = "low")
 ```
