@@ -1,2 +1,6 @@
 # pandazip
-Reduce memory footprint of Pandas DataFrame without losing information.
+Compress Pandas DataFrame without losing information, reduce memory footprint.
+
+
+
+
