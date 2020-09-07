@@ -9,7 +9,8 @@
   <img src="https://github.com/meetyildiz/pandazip/blob/master/logo-2.png?raw=true" width="300" />
 </p>
 
-**Pandazip**Go minimal, go green, go pandazip
+**Pandazip**
+Go minimal, go green, go pandazip
 
 Cut memory footprint by half in just three lines of code. Compress Pandas DataFrame without losing information.
 
