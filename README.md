@@ -6,7 +6,7 @@
 
 
 <p align="center">
-  <img src="https://github.com/meetyildiz/pandazip/blob/master/logo.png?raw=true" width="300" />
+  <img src="https://github.com/meetyildiz/pandazip/blob/master/logo-2.png?raw=true" width="300" />
 </p>
 
 ---
