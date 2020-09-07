@@ -9,11 +9,7 @@
   <img src="https://github.com/meetyildiz/pandazip/blob/master/logo-2.png?raw=true" width="300" />
 </p>
 
----
-<a href="https://travis-ci.org/slundberg/shap"><img src="https://travis-ci.org/slundberg/shap.svg?branch=master"></a>
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/slundberg/shap/master)
-
-**Pandazip** 
+**Pandazip**  Go minimal, go greeni go pandazip
 
 Cut memory footprint by half in just three lines of code. Compress Pandas DataFrame without losing information.
 
