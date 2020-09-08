@@ -12,12 +12,12 @@
 **Pandazip**
 Go minimal, go green, go pandazip
 
-Cut memory footprint by half in just three lines of code. Compress Pandas DataFrame without losing information.
+Cut memory footprint by half in just 2 lines of code. Compress Pandas DataFrame without/with losing information.
 
 
 ## Install
 
-Shap can be installed from either [PyPI](https://pypi.org/project/pandazip) or [conda-forge](https://anaconda.org/conda-forge/pandazip):
+Shap can be installed from either [PyPI](https://pypi.org/project/pandazip):
 
 <pre>
 pip install pandazip
@@ -29,10 +29,5 @@ conda install -c conda-forge pandazip
 
 ```python
 from pandazip import Pandazip
-
-# Initialize Pandazip
-zipper = Pandazip()
-
-# Compress Pandas DataFrame
-compressed_dataframe = zipper.zip(raw_dataframe, level = "low")
+compressed_dataframe = Pandazip().zip(raw_dataframe, level = "low")
 ```
