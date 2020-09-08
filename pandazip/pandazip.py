@@ -1,48 +1,20 @@
 import numpy as np
 import pandas as pd
-import time
 import gc
 from joblib import Parallel, delayed
-
-
-def measure_time_mem(func):
-    def wrapped_reduce(self, data, *args, **kwargs):
-        # pre
-        mem_usage_orig = data.memory_usage().sum() / self.memory_scale_factor
-        start_time = time.time()
-        # exec
-        ret = func(self, data, *args, **kwargs)
-        # post
-        mem_usage_new = ret.memory_usage().sum() / self.memory_scale_factor
-        end_time = time.time()
-        """
-        print(f'reduced data from {mem_usage_orig:.4f} MB '
-              f'to {mem_usage_new:.4f} MB '
-              f'in {(end_time - start_time):.2f} seconds')
-        """
-        gc.collect()
-        return ret
-
-    return wrapped_reduce
+from pandazip.utils import measure_time_mem
 
 
 class Pandazip:
     """
-    Class that takes a dict of increasingly big numpy datatypes to transform
-    the data of a pandas dataframe into, in order to save memory usage.
+    Class that gets a Pandas DataFrame and compresses its data to smallest
+    feasible datatype per column if level="low". If level is "mid" or "high",
+    number data types are force to 32 and 16 bits respectively.
     """
-    memory_scale_factor = 1024 ** 2  # memory in MB
 
-    def __init__(self, encode_cat=False, n_jobs=-1):
-        """
-        :param conv_table: dict with np.dtypes-strings as keys
-        :param encode_cat: Whether the new pandas dtype "Categoricals"
-                shall be used
-        :param n_jobs: Parallelization rate
-        """
-        conv_table = None
+    def __init__(self):
 
-        self.n_jobs = n_jobs
+        self.n_jobs = -1
 
     def _type_candidates(self, k):
         for c in self.compress_lookup[k]:
@@ -55,6 +27,7 @@ class Pandazip:
         smallest necessary types.
 
         :param data: pandas dataframe
+        :param level: string - "low", "mid", "high"
         :param verbose: If True, outputs more information
         :return: pandas dataframe with reduced data types
         """
@@ -62,25 +35,28 @@ class Pandazip:
             self.compress_lookup = {'int': [np.int8, np.int16, np.int32, np.int64],
                                     'uint': [np.uint8, np.uint16, np.uint32, np.uint64],
                                     'float': [np.float16, np.float32, np.float64, ]}
-            self.encode_cat = False
+            self.pandas_category = False
 
         elif level == "mid":
             self.compress_lookup = {'int': [np.int8, np.int16, np.int32],
                                     'uint': [np.uint8, np.uint16, np.uint32],
                                     'float': [np.float16, np.float32]}
-            self.encode_cat = False
+            self.pandas_category = True
 
         elif level == "high":
             self.compress_lookup = {'int': [np.int8, np.int16],
                                     'uint': [np.uint8, np.uint16],
                                     'float': [np.float16]}
-            self.encode_cat = True
+            self.pandas_category = True
 
         else:
-            print("bad")
+            print("Bad level")
 
         start_size = round(data.memory_usage().sum() / 1024 ** 2, 2)
-        print("Starting size is :{} MB".format(start_size))
+        print("Starting size :{} MB".format(start_size))
+
+        for col in data.columns:
+            data[col] = pd.to_numeric(data[col], errors='ignore')
 
         ret_list = Parallel(n_jobs=self.n_jobs)(delayed(self._reduce)
                                                 (data[c], c, verbose) for c in
@@ -90,10 +66,12 @@ class Pandazip:
         gc.collect()
 
         reduced_data = pd.concat(ret_list, axis=1)
+        boolian_cols = reduced_data.select_dtypes("bool").columns
+        reduced_data[boolian_cols] = reduced_data[boolian_cols].astype(np.uint8)
 
         final_size = round(reduced_data.memory_usage().sum() / 1024 ** 2, 2)
-        print("Finishing size is :{} MB".format(final_size))
-        print("Compression rate is {}%".format(round(1 - final_size / start_size, 2)))
+        print("Finishing size: {} MB".format(final_size))
+        print("Compression rate: {}%".format(round((1 - final_size / start_size) * 100, 2)))
         return reduced_data
 
     def _reduce(self, s, colname, verbose):
@@ -108,7 +86,7 @@ class Pandazip:
         elif np.issubdtype(coltype, np.floating):
             conv_key = 'float'
         else:
-            if isinstance(coltype, object) and self.encode_cat:
+            if isinstance(coltype, object) and self.pandas_category:
                 # check for all-strings series
                 if s.apply(lambda x: isinstance(x, str)).all():
                     if verbose: print(f'convert {colname} to categorical')
@@ -121,7 +99,6 @@ class Pandazip:
                 if verbose: print(f'convert {colname} to {cand}')
                 return s.astype(cand)
 
-        # reaching this code is bad. Probably there are inf, or other high numbs
-        print(f"WARNING: {colname} doesn't fit the grid with \nmax: {s.max()} "
-              f"and \nmin: {s.min()}")
-        print('Dropping it..')
+        return s.astype(cand)
+
+
