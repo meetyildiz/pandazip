@@ -147,3 +147,18 @@ env_pandazip/include/
 
 /build/
 /build/
+!/build/
+!/.gitignore
+!/main.py
+!/app.py
+.DS_Store
+test/.idea/.gitignore
+test/.idea/dbnavigator.xml
+test/.idea/inspectionProfiles/
+test/.idea/misc.xml
+test/.idea/modules.xml
+test/.idea/sonarlint/
+test/.idea/test.iml
+test/.idea/vcs.xml
+test/env_test_pandazip/bin/
+test/env_test_pandazip/include/

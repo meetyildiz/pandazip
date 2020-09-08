@@ -4,12 +4,14 @@ import setuptools
 
 setuptools.setup(
     name='pandazip',
-    version='0.0.2',
+    version='0.0.1',
     description='Cut memory footprint by half in just 2 lines of code. Compress Pandas DataFrame without losing information.',
     url='https://github.com/meetyildiz/pandazip',
     author='MEHMET YILDIZ',
     author_email='myildiz.ie@gmail.com',
-    packages=setuptools.find_packages(),
+    packages=setuptools.find_packages(where='./pandazip'),
+    package_dir={
+        '': 'pandazip'},
     install_requires=['pandas',
                       'numpy',
                       'joblib',
