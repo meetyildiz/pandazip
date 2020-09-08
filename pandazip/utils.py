@@ -1,7 +1,7 @@
 import gc
 from datetime import time
 
-s
+
 def measure_time_mem(func):
     def wrapped_reduce(self, data, *args, **kwargs):
         # pre

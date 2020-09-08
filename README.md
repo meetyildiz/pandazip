@@ -2,27 +2,24 @@
 
 
 
-
-
-
-<p align="left">
-  <img src="https://github.com/meetyildiz/pandazip/blob/master/logo.png?raw=true" width="300" />
+<p align="center">
+  <img src="https://github.com/meetyildiz/pandazip/blob/master/logo.png?raw=true" width="400" />
 </p>
 
-**Pandazip**
-Go minimal, go green, go pandazip
+**Go minimal, go green, go pandazip.**
 
-Cut memory footprint by half in just 2 lines of code. Compress Pandas DataFrame without/with losing information.
+
+Cut memory footprint by half in just 2 lines of code. 
+Compress Pandas DataFrame without/with losing information.
+Swift parallel execution.
 
 
 ## Install
 
-Shap can be installed from either [PyPI](https://pypi.org/project/pandazip):
+Shap can be installed from [PyPI](https://pypi.org/project/pandazip/):
 
 <pre>
 pip install pandazip
-<i>or</i>
-conda install -c conda-forge pandazip
 </pre>
 
 ## Compressing Pandas DataFrame using Pandazip
@@ -49,3 +46,10 @@ compressed_dataframe = Pandazip().zip(raw_dataframe, level="high")
 ```
 
 ## Results
+
+Pandazip is tested on more than 100 Kaggle datasets and notebooks, feel free to share your results.
+
+<p align="center">
+  <img src="https://github.com/meetyildiz/pandazip/blob/master/pandazip results.png?raw=true" width="800" />
+</p>
+
