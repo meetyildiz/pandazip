@@ -5,22 +5,19 @@
 
 
 
-<p align="center">
+<p align="left">
   <img src="https://github.com/meetyildiz/pandazip/blob/master/logo.png?raw=true" width="300" />
 </p>
 
----
-<a href="https://travis-ci.org/slundberg/shap"><img src="https://travis-ci.org/slundberg/shap.svg?branch=master"></a>
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/slundberg/shap/master)
+**Pandazip**
+Go minimal, go green, go pandazip
 
-**Pandazip** 
-
-Cut memory footprint by half in just three lines of code. Compress Pandas DataFrame without losing information.
+Cut memory footprint by half in just 2 lines of code. Compress Pandas DataFrame without/with losing information.
 
 
 ## Install
 
-Shap can be installed from either [PyPI](https://pypi.org/project/pandazip) or [conda-forge](https://anaconda.org/conda-forge/pandazip):
+Shap can be installed from either [PyPI](https://pypi.org/project/pandazip):
 
 <pre>
 pip install pandazip
@@ -32,10 +29,23 @@ conda install -c conda-forge pandazip
 
 ```python
 from pandazip import Pandazip
-
-# Initialize Pandazip
-zipper = Pandazip()
-
-# Compress Pandas DataFrame
-compressed_dataframe = zipper.zip(raw_dataframe, level = "low")
+compressed_dataframe = Pandazip().zip(raw_dataframe)
 ```
+
+## Lossless Compression
+
+Compression level can be tuned with level parameter. Default is level="low", which is lossless. Every column is converted to the smallest datatype that can store column's data without losing information.
+
+```python
+compressed_dataframe = Pandazip().zip(raw_dataframe, level="low")
+```
+
+## Lossly Compression
+
+When level parameter is set to "mid" or "high", Pazdazip limits numeric datatypes to 32 and 16 bits respectively. Also, string columns are converted to categoric datatype, if feasable.
+
+```python
+compressed_dataframe = Pandazip().zip(raw_dataframe, level="high")
+```
+
+## Results
