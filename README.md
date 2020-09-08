@@ -29,5 +29,25 @@ conda install -c conda-forge pandazip
 
 ```python
 from pandazip import Pandazip
-compressed_dataframe = Pandazip().zip(raw_dataframe, level = "low")
+compressed_dataframe = Pandazip().zip(raw_dataframe)
 ```
+
+## Lossless Compression
+
+Compression level can be tuned with level parameter. Default is level="low", which is lossless. Every column is converted to the smallest datatype that can store column's information.
+
+```python
+from pandazip import Pandazip
+compressed_dataframe = Pandazip().zip(raw_dataframe, level="low")
+```
+
+## Lossly Compression
+
+When level parameter is set to "mid" or "high", Pazdazip limits numeric datatypes to 32 and 16 bits respectively. Also, string columns are converted to categoric datatype, if feasable.
+
+```python
+from pandazip import Pandazip
+compressed_dataframe = Pandazip().zip(raw_dataframe, level="high")
+```
+
+## Results
