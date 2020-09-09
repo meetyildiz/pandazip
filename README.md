@@ -1,4 +1,8 @@
 # pandazip
+[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/Naereen/StrapDown.js.svg)](https://GitHub.com/Naereen/StrapDown.js/issues/)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
+[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 
 
 
@@ -16,7 +20,7 @@ Swift parallel execution.
 
 ## Install
 
-Shap can be installed from [PyPI](https://pypi.org/project/pandazip/):
+pandazip can be installed from [PyPI](https://pypi.org/project/pandazip/):
 
 <pre>
 pip install pandazip
