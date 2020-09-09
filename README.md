@@ -13,10 +13,13 @@
 **Go minimal, go green, go pandazip.**
 
 
-Cut memory footprint by half in just 2 lines of code. 
-Compress Pandas DataFrame without/with losing information.
-Swift parallel execution.
+Cut memory footprint by forth in just 2 lines of code. 
+Compress Pandas DataFrames without losing information or go smaller in expense of losing a bit of information.
+Swift parallel execution makes pandazip fast.
 
+"According to the American Council for an Energy-Efficient Economy it takes 5.12 kWh of electricity per gigabyte of transferred data. And according to the Department of Energy the average US power plant expends 600 grams of carbon dioxide for every kWh generated. That means that **transferring 1GB of data produces 3kg of CO2**." + computation + storage = Huge impact on environment without without noticing.
+
+**Take action now!**
 
 ## Install
 
