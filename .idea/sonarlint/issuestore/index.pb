@@ -1,0 +1,22 @@
+
+:
+
+.gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
+9
+	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+8
+setup.py,8/e/8e2edce0d507e1297474f25c00cae94258db38d8
+D
+pandazip/__init__.py,0/2/02de6fd7c96874334599b2aa8dc7b6e9316cd60a
+7
+main.py,f/1/f1bdda93d9a278e358509d498e17d97764c1fb29
+D
+pandazip/pandazip.py,2/b/2bf58fe2c9d52a747ceab121193385bb94ff9af0
+A
+pandazip/utils.py,4/4/44e7c8472126747e4b7e3d3f903560f4e0253a9a
+7
+LICENSE,0/3/0398ccd0f49298b10a3d76a47800d2ebecd49859
+@
+requirements.txt,1/9/19359a61ae2446b51b549167b014da2fcf265768
+6
+app.py,1/3/13cce7fd076299c81b4986166f3d822791c9490e

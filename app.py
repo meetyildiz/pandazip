@@ -1,3 +1,4 @@
+
 import pandas as pd
 import numpy as np
 from sklearn.datasets import load_breast_cancer
@@ -8,8 +9,8 @@ cancer = load_breast_cancer()
 df = pd.DataFrame(np.c_[cancer['data'], cancer['target']],
                   columns = np.append(cancer['feature_names'], ['target']))
 
-print(Pandazip().zip(df, level="high"))
-
+print(Pandazip().zip(df, level="low"))
+"""
 import numpy as np
 import pandas as pd
 from sklearn.datasets import load_iris
@@ -45,3 +46,4 @@ print(Pandazip().zip(df_boston, level="low"))
 
 
 print(Pandazip().zip(df_boston, level="high"))
+"""
