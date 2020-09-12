@@ -2,13 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="76b96724-aa33-4dab-aa5f-f58399486dc4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app.py" beforeDir="false" afterPath="$PROJECT_DIR$/../app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pandazip results.png" beforeDir="false" afterPath="$PROJECT_DIR$/../pandazip results.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pandazip/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../pandazip/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pandazip/pandazip.py" beforeDir="false" afterPath="$PROJECT_DIR$/../pandazip/pandazip.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pandazip/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/../utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/../setup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +34,12 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
