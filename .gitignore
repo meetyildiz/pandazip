@@ -1,8 +1,0 @@
-/test/env_ziptest/
-/pandazip.egg-info/
-/env_pandazip/
-/dist/
-/build/
-/.gitignore/
-!/pandazip_old.py
-!/utils.py
