@@ -12,9 +12,8 @@ def read(fname):
 
 setuptools.setup(
     name='pandazip',
-    version='0.0.6',
-    description='Cut memory footprint by half in just 2 lines of code.'
-                ' Compress Pandas DataFrame without losing information.',
+    version='0.0.7',
+    description='Cut memory footprint by half in just 2 lines of code.',
     long_description_content_type='text/markdown',
     long_description=read('README.md'),
     url='https://github.com/meetyildiz/pandazip',
@@ -23,8 +22,7 @@ setuptools.setup(
     packages=["pandazip"],
 
     install_requires=['pandas',
-                      'numpy',
-                      'joblib',
+                      'joblib'
                       ],
     classifiers=[
         "Programming Language :: Python :: 3",
