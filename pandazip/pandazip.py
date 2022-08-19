@@ -1,3 +1,4 @@
+from tabnanny import verbose
 import numpy as np
 import pandas as pd
 import gc
@@ -10,11 +11,12 @@ class Pandazip:
     feasible datatype per column.
     """
 
-    def __init__(self, pandas_category=True, pandas_int=False, parallel=True):
-        print("Pandazip started", end="  /   ")
+    def __init__(self, pandas_category=True, pandas_int=False, parallel=True, verbose=True):
+        print("Pandazip started")
         self.pandas_category = pandas_category
         self.pandas_int = pandas_int
         self.parallel = parallel
+        self.verbose = verbose
 
     def fit_transform(self, data):
 
@@ -24,26 +26,33 @@ class Pandazip:
                                 'float': [np.float16, np.float32, np.float64, ]}
 
         start_size = round(data.memory_usage(deep=False).sum(), 2)
-        print("Input size :{}".format(start_size), end="  /   ")
+        print("Input size :{}".format(start_size))
 
+        print("Transforming available columns to numeric data type.")
         for col in data.columns:
+            if verbose:
+                print(col)
             data[col] = pd.to_numeric(data[col], errors='ignore')
 
 
         if self.parallel:
+            print("Parallel calculation...")
             data = Parallel(n_jobs=-1)(delayed(self._reduce)
                                                     (data[c]) for c in
                                                     data.columns)
             data = pd.concat(data, axis=1)
         else:
+            print("Serial calculation...")
             for col in data.columns:
+                if verbose:
+                    print(col)
                 data[col] = self._reduce(data[col])
         
         gc.collect()
         self.dtpes = data.dtypes
 
         final_size = round(data.memory_usage(deep=False).sum(), 2)
-        print("Output size: {}".format(final_size), end="  /   ")
+        print("Output size: {}".format(final_size))
         print("Compression rate: {}".format(round((start_size / final_size)*100, 2)))
         return data
 
@@ -58,7 +67,7 @@ class Pandazip:
 
 
     def _reduce(self, s):
-
+        s = pd.to_numeric(s, errors='ignore')
         coltype = s.dtype
 
         if np.issubdtype(coltype, np.integer):
