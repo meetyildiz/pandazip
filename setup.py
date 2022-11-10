@@ -12,8 +12,8 @@ def read(fname):
 
 setuptools.setup(
     name='pandazip',
-    version='0.0.10',
-    description='Cut memory footprint by half in just 2 lines of code.',
+    version='0.1.0',
+    description='Decrease DataFrame size with 2 lines of code.',
     long_description_content_type='text/markdown',
     long_description=read('README.md'),
     url='https://github.com/meetyildiz/pandazip',
