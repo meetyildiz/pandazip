@@ -1,4 +1,3 @@
-from tabnanny import verbose
 import numpy as np
 import pandas as pd
 import gc
@@ -32,7 +31,10 @@ class Pandazip:
         for col in data.columns:
             if self.verbose:
                 print(col)
-            data[col] = pd.to_numeric(data[col], errors='ignore')
+            # Only convert to numeric if it's not already a category or string column that should be one
+            if self._is_category_candidate(data[col].dtype):
+                continue
+            data[col] = pd.to_numeric(data[col], errors='coerce')
 
 
         if self.parallel:
@@ -58,16 +60,41 @@ class Pandazip:
 
 
     def transform(self, data):
+        for col, tp in self.dtpes.items():
+            if col not in data.columns:
+                continue
 
-        for col, tp in self.dtpes.iteritems():
-            data[col] = data[col].astype(tp)
-        
+            # Category columns are not numeric; cast them directly.
+            if isinstance(tp, pd.CategoricalDtype):
+                data[col] = data[col].astype(tp)
+                continue
+
+            s = pd.to_numeric(data[col], errors='coerce')
+
+            if pd.api.types.is_extension_array_dtype(tp):
+                # Nullable extension types (e.g. Int64) can hold NaNs directly.
+                data[col] = s.astype(tp)
+            elif np.issubdtype(tp, np.integer) and s.isna().any():
+                # Use nullable integer types when the target is a numpy int and NaNs appear.
+                data[col] = s.astype('Int64')
+            else:
+                data[col] = s.astype(tp)
         return data
 
 
 
+    def _is_category_candidate(self, dtype):
+        """Return True for dtypes that should be left as categories."""
+        if isinstance(dtype, pd.CategoricalDtype):
+            return True
+        return self.pandas_category and pd.api.types.is_string_dtype(dtype)
+
     def _reduce(self, s):
-        s = pd.to_numeric(s, errors='ignore')
+        # Check if it's already category or string that should be one BEFORE calling to_numeric
+        if self._is_category_candidate(s.dtype):
+            return s.astype('category')
+
+        s = pd.to_numeric(s, errors='coerce')
         coltype = s.dtype
 
         if np.issubdtype(coltype, np.integer):
@@ -81,7 +108,7 @@ class Pandazip:
 
 
         else:
-            if isinstance(coltype, object) and self.pandas_category:
+            if self._is_category_candidate(coltype):
                 return s.astype('category')
 
             return s
