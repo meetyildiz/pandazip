@@ -89,6 +89,18 @@ class Pandazip:
             return True
         return self.pandas_category and pd.api.types.is_string_dtype(dtype)
 
+    @staticmethod
+    def _is_whole_number(s):
+        """Return True when all non-null values are whole numbers in int64 range."""
+        values = s.dropna()
+        if values.empty:
+            return True
+        int_info = np.iinfo(np.int64)
+        return bool(
+            (values % 1 == 0).all()
+            and values.between(int_info.min, int_info.max).all()
+        )
+
     def _reduce(self, s):
         # Check if it's already category or string that should be one BEFORE calling to_numeric
         if self._is_category_candidate(s.dtype):
@@ -101,10 +113,9 @@ class Pandazip:
             conv_key = 'int' if s.min() < 0 else 'uint'
 
         elif np.issubdtype(coltype, np.floating):
-            if self.pandas_int:
+            if self.pandas_int and self._is_whole_number(s):
                 return s.astype('Int64')
-            else:
-                conv_key = 'float'
+            conv_key = 'float'
 
 
         else:

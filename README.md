@@ -58,6 +58,9 @@ data.
 
 Integer downcasts are lossless. Float downcasts preserve the value range but
 may lose precision (for example, `1.1` does not survive a cast to `float16`).
+With `pandas_int=True`, float columns whose values are all whole numbers are
+converted to nullable `Int64` instead; columns with fractional values stay
+floating-point.
 
 ## API
 
@@ -66,7 +69,7 @@ may lose precision (for example, `1.1` does not survive a cast to `float16`).
 | Parameter | Default | Description |
 |---|---|---|
 | `pandas_category` | `True` | Convert object and string columns to `category`. When `False`, those columns are coerced to numeric and non-numeric values become `NaN`. |
-| `pandas_int` | `False` | Cast floating-point columns to pandas' nullable `Int64`. Only use this when float columns contain whole numbers; fractional values raise `TypeError`. |
+| `pandas_int` | `False` | Convert float columns that contain only whole numbers to pandas' nullable `Int64`. Columns with fractional values stay floating-point. |
 | `parallel` | `True` | Process columns in parallel with `joblib` (`n_jobs=-1`). Set to `False` for serial execution. |
 | `verbose` | `True` | Print each column as it is processed. Summary lines are always printed. |
 

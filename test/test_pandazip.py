@@ -135,4 +135,20 @@ def test_transform_preserves_nullable_int():
     assert str(transformed['x'].dtype) == 'Int64'
     assert transformed['x'].tolist() == [4, 5]
 
+@pytest.mark.parametrize("parallel", [True, False])
+def test_pandas_int_only_casts_whole_numbers(parallel):
+    df = pd.DataFrame({
+        'whole': [1.0, 2.0, 3.0],
+        'with_nan': [1.0, np.nan, 3.0],
+        'fractional': [1.5, 2.7, 3.2],
+    })
+
+    compressed = Pandazip(pandas_int=True, parallel=parallel).fit_transform(df.copy())
+
+    assert str(compressed['whole'].dtype) == 'Int64'
+    assert compressed['whole'].tolist() == [1, 2, 3]
+    assert str(compressed['with_nan'].dtype) == 'Int64'
+    assert pd.isna(compressed['with_nan']).sum() == 1
+    assert np.issubdtype(compressed['fractional'].dtype, np.floating)
+
 
