@@ -43,7 +43,8 @@ def test_memory_reduction_california():
     assert final_mem < initial_mem
     pd.testing.assert_frame_equal(df.astype(compressed_df.dtypes), compressed_df)
 
-def test_fit_transform_consistency():
+@pytest.mark.parametrize("parallel", [True, False])
+def test_fit_transform_consistency(parallel):
     # Create a dataframe with known values that can be downcasted
     data = {
         'small_int': [1, 2, 3], # should be int8
@@ -53,13 +54,27 @@ def test_fit_transform_consistency():
     }
     df = pd.DataFrame(data)
 
-    zipper = Pandazip(pandas_category=True)
+    zipper = Pandazip(pandas_category=True, parallel=parallel)
     compressed = zipper.fit_transform(df.copy())
 
     assert compressed['small_int'].dtype == np.uint8
     assert compressed['large_int'].dtype == np.uint64
     assert compressed['obj_col'].dtype == 'category'
     pd.testing.assert_frame_equal(df.astype(compressed.dtypes), compressed)
+
+def test_parallel_and_serial_results_match():
+    df = pd.DataFrame({
+        'small_int': [1, 2, 3],
+        'negative_int': [-1, -2, -3],
+        'large_int': [10**10, 10**11, 10**12],
+        'float_col': [1.1, 2.2, 3.3],
+        'obj_col': ['a', 'b', 'a'],
+    })
+
+    parallel_df = Pandazip(parallel=True).fit_transform(df.copy())
+    serial_df = Pandazip(parallel=False).fit_transform(df.copy())
+
+    pd.testing.assert_frame_equal(parallel_df, serial_df)
 
 def test_transform_consistency():
     data_train = {'a': [1, 2], 'b': [100, 200]}
@@ -87,11 +102,12 @@ def test_handle_incompatible_types_in_transform():
     assert str(transformed['a'].dtype) == 'Int64'
     assert pd.isna(transformed['a']).all() # because of errors='coerce'
 
-def test_string_dtype_converted_to_category():
+@pytest.mark.parametrize("parallel", [True, False])
+def test_string_dtype_converted_to_category(parallel):
     # Pandas may infer a dedicated string dtype instead of object
     df = pd.DataFrame({'obj_col': pd.Series(['a', 'b', 'a'], dtype='string')})
 
-    zipper = Pandazip(pandas_category=True)
+    zipper = Pandazip(pandas_category=True, parallel=parallel)
     compressed = zipper.fit_transform(df.copy())
 
     assert isinstance(compressed['obj_col'].dtype, pd.CategoricalDtype)
